@@ -1,0 +1,9 @@
+- Name: UpsideDownTheo
+  Version: 0.1.0
+  DLL: bin/UpsideDownTheo.dll
+  Dependencies:
+    - Name: EverestCore
+      Version: 1.4673.0
+  OptionalDependencies:
+    - Name: MaxHelpingHand
+      Verison: 1.0.0
