@@ -10,12 +10,23 @@ namespace Celeste.Mod.UpsideDownTheo {
 	[CustomEntity("UpsideDownTheo/UpsideDownTheo")]
 	[TrackedAs(typeof(TheoCrystal))]
 	public class UpsideDownTheo : TheoCrystal {
+		private Action<Scene> actorAdded;
+
 		public UpsideDownTheo(EntityData data, Vector2 offset) : base(data, offset) {
+			// dirty hack to call base.base.Added() -- THIS CRASHES ON MACOS.
+			actorAdded = (Action<Scene>)Activator.CreateInstance(typeof(Action<Scene>), this, typeof(Actor).GetMethod("Added").MethodHandle.GetFunctionPointer());
+
 			Hold.OnHitSpinner = HitSpinnerUpsideDown;
 			onCollideV = OnCollideVUpsideDown;
 
 			sprite.Position.Y -= 10f;
 			sprite.Scale.Y = -1f;
+		}
+
+		//[MonoModLinkTo("Celeste.Actor", "System.Void Added(Monocle.Scene)")]
+		public override void Added(Scene scene) {
+			actorAdded(scene);
+			Level = SceneAs<Level>();
 		}
 
 		[MonoModLinkTo("Celeste.Actor", "System.Void Update()")]
