@@ -26,5 +26,5 @@ known issues:
 - it doesn't move alongside a moving block while standing on top (or, actually, on the bottom) of it, unlike a regular theo crystal
 
 todo:  
-**- fix macos crash**
+- **fix macos crash**
 - make it reskinnable from loenn altho it should already be reskinnable from sprites.xml (changing the normal theo crystal sprite will affect this one too)
